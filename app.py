@@ -32,12 +32,15 @@ def get_ai_advice(raw_stats):
     Keep it strictly under 3 sentences. Use a conversational, peer-to-peer tone.
     """
     
-    # Call the model
-    response = client.models.generate_content(
-        model='gemini-3.5-flash',
-        contents=prompt
-    )
-    return response.text
+    try:# Call the model
+        response = client.models.generate_content(
+            model='gemini-3.5-flash',
+            contents=prompt
+        )
+        return response.text
+    except Exception as e:
+        return f"⚠️AI adive unavailable right now(server hiccup)-- but your raw stats above are accurate"
+
 
 def main():
     st.title("🎓 AI Attendance-Eligibility Advisor")
